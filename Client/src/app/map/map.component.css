@@ -1,0 +1,10 @@
+:host {
+  display: flex;
+  height: 100vh;
+  flex: auto;
+}
+
+.map-container {
+
+  width: 100%;
+}
