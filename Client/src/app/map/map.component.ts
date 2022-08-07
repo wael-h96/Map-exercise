@@ -37,12 +37,7 @@ export class MapComponent implements OnInit {
       target: 'ol-map',
     });
     this.map.on('click', (evt) => {
-      this.clickedCoordinates.lat = evt.coordinate[0];
-      this.clickedCoordinates.lon = evt.coordinate[1];
+      this.mapClick.emit({ lat: evt.coordinate[0], lon: evt.coordinate[1] });
     });
-  }
-
-  handleMapClick() {
-    this.mapClick.emit(this.clickedCoordinates);
   }
 }
