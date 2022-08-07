@@ -1,11 +1,10 @@
 <div class="main-container">
   <map-component (mapClick)="handleClick($event)"></map-component>
   <div class="display-coordinates">
-    <ul *ngFor="let coor of clickedCoordinates">
-      <li>
-        lat:{{ coor.coordinates.lat }} lon:{{ coor.coordinates.lon }}
-        {{ coor.time | date: "short" }}
-      </li>
-    </ul>
+    <div class="card" *ngFor="let coor of clickedCoordinates">
+      <div><span>Lat: </span>{{ coor.coordinates.lat }}</div>
+      <div><span>Lon: </span>{{ coor.coordinates.lon }}</div>
+      <div><span>Time: </span>{{ coor.time | date: "short" }}</div>
+    </div>
   </div>
 </div>

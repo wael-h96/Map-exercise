@@ -16,6 +16,10 @@ export class AppComponent {
   clickedCoordinates: Array<DisplayCoordinates> = [];
 
   handleClick(coor: Coordinates) {
-    this.clickedCoordinates.push({ coordinates: coor, time: new Date() });
+    const newClickedCoor: DisplayCoordinates = {
+      coordinates: coor,
+      time: new Date(),
+    };
+    this.clickedCoordinates.push(newClickedCoor);
   }
 }
