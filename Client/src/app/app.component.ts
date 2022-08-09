@@ -18,6 +18,18 @@ export class AppComponent {
 
   constructor(private mapService: MapService) {}
 
+  ngOnInit() {
+    this.getCoordinates();
+  }
+
+  getCoordinates() {
+    this.mapService.fetchCoordinates().subscribe((res) => {
+      (res as any).forEach(({ _source: coor }: any) =>
+        this.clickedCoordinates.push(coor)
+      );
+    });
+  }
+
   handleClick(coor: Coordinates) {
     const newClickedCoor: DisplayCoordinates = {
       coordinates: coor,

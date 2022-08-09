@@ -20,4 +20,8 @@ export class MapService {
       }
     );
   }
+
+  fetchCoordinates() {
+    return this.http.get(this.URL + '/get-coordinates');
+  }
 }
