@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg bg-light fixed-top bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand text-light disabled">W-W-Map</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <div *ngIf="authService.currentUser; then Logout; else Login"></div>
+        <ng-template #Login>
+          <a
+            class="nav-link active text-light"
+            aria-current="page"
+            routerLink="/login"
+            >Login</a
+          >
+        </ng-template>
+        <ng-template #Logout>
+          <a
+            class="nav-link active text-light"
+            aria-current="page"
+            (click)="handleLogout()"
+            routerLink=""
+            >Logout</a
+          >
+        </ng-template>
+        <a
+          class="nav-link active text-light"
+          aria-current="page"
+          routerLink="/map"
+          >Map</a
+        >
+      </div>
+    </div>
+  </div>
+</nav>

@@ -3,6 +3,8 @@ import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
+import { MapService } from '../services/map.service';
+import { DisplayCoordinates } from '../app.component';
 
 export interface Coordinates {
   lat: number | null;
@@ -16,14 +18,12 @@ export interface Coordinates {
 })
 export class MapComponent implements OnInit {
   map: Map | undefined;
-  @Output() mapClick = new EventEmitter();
-  clickedCoordinates: Coordinates;
+  clickedCoordinates: Array<DisplayCoordinates> = [];
 
-  constructor() {
-    this.clickedCoordinates = { lat: null, lon: null };
-  }
-
+  constructor(private mapService: MapService) {}
+  
   ngOnInit(): void {
+    console.log("got ehre")
     this.map = new Map({
       view: new View({
         center: [0, 0],
@@ -37,7 +37,27 @@ export class MapComponent implements OnInit {
       target: 'ol-map',
     });
     this.map.on('click', (evt) => {
-      this.mapClick.emit({ lat: evt.coordinate[0], lon: evt.coordinate[1] });
+      this.handleClick({lat:evt.coordinate[0],lon:evt.coordinate[1]})
     });
+    this.getCoordinates();
+  }
+
+  getCoordinates() {
+    this.mapService.fetchCoordinates().subscribe((res) => {
+      (res as any).forEach(({ _source: coor }: any) =>
+        this.clickedCoordinates.push(coor)
+      );
+    });
+  }
+
+  handleClick(coor: Coordinates) {
+    const newClickedCoor: DisplayCoordinates = {
+      coordinates: coor,
+      time: new Date(),
+    };
+    this.clickedCoordinates.push(newClickedCoor);
+    this.mapService
+      .saveData(newClickedCoor)
+      .subscribe((res) => console.log(res));
   }
 }

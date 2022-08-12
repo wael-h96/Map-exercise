@@ -1,1 +1,10 @@
-<div id="ol-map" class="map-container"></div>
+<div class="main-container">
+  <div id="ol-map" class="map-container"></div>
+  <div class="display-coordinates">
+    <div class="card" *ngFor="let coor of clickedCoordinates">
+      <div><span>Lat: </span>{{ coor.coordinates.lat }}</div>
+      <div><span>Lon: </span>{{ coor.coordinates.lon }}</div>
+      <div><span>Time: </span>{{ coor.time | date: "short" }}</div>
+    </div>
+  </div>
+</div>
