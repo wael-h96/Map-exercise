@@ -12,6 +12,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'map', component: MapComponent },
+  { path: '**', component: LoginComponent },
 ];
 
 @NgModule({
